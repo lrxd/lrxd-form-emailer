@@ -7,7 +7,14 @@ class EmailController < ApplicationController
     submission = form_params
     pp submission
 
-    FormEmailer.send_form_email(submission[:form_name], submission[:referer], submission[:form_data]).deliver_now
+    submission[:email_sent] = true
+    begin
+      FormEmailer.send_form_email(submission[:form_name], submission[:referer], submission[:form_data]).deliver_now
+    rescue
+      submission[:email_sent] = false
+    end
+
+    FormSubmission.create(submission)
 
     redirect_to ((submission[:callback].blank? ? submission[:referer] : submission[:callback]) + "?submitted=true")
   end
