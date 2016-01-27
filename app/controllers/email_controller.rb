@@ -10,7 +10,10 @@ class EmailController < ApplicationController
     submission[:email_sent] = true
     begin
       FormEmailer.send_form_email(submission[:form_name], submission[:referer], submission[:form_data]).deliver_now
-    rescue
+    rescue => e
+      p "*" * 80
+      pp e
+      p "*" * 80
       submission[:email_sent] = false
     end
 
