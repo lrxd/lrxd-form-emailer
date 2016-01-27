@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style type="text/css">
+    pre { display: inline-block; }
+    </style>
+  </head>
+  <body>
+    <h3>New submission from "<%= @form_name %>" at <a href="<%= @form_url %>"><%= @form_url %></a>:</h3>
+    <ul>
+      <% @form_data.each_pair do |key, value| %>
+        <li><%= key.titleize %>: <pre><%= value %></pre></li>
+      <% end %>
+    </ul>
+  </body>
+</html>

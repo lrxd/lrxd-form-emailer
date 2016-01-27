@@ -1,0 +1,28 @@
+development:
+  adapter: postgresql
+  host: localhost
+  database: lrxd_form_emailer_development
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username:
+  password: 
+
+test:
+  adapter: postgresql
+  host: localhost
+  database: lrxd_form_emailer_test
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username:
+  password: 
+
+production:
+  adapter: postgresql
+  database: lrxd_form_emailer_production
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username:
+  password: 
