@@ -5,11 +5,15 @@ class EmailController < ApplicationController
 
   def form_submission
     submission = form_params
-    pp submission
+
+    referer_uri = URI.parse(submission[:referer])
+    if !submission[:callback].blank?
+      callback_uri = URI.parse(submission[:callback])
+    end
 
     submission[:email_sent] = true
     begin
-      FormEmailer.send_form_email(submission[:form_name], submission[:referer], submission[:form_data]).deliver_now
+      FormEmailer.send_form_email(submission[:form_name], submission[:referer], submission[:form_data], referer_uri.host).deliver_now
     rescue => e
       p "*" * 80
       pp e
