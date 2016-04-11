@@ -25,6 +25,14 @@ class FormEmailer < ApplicationMailer
       @reply_to = @from
     end
 
-    mail(from: @from, reply_to: @reply_to, subject: "New submission from " + @form_name.to_s)
+
+    # Override to for some sites
+    if @form_url.include? 'howespropertymanagement'
+      @to = ENV['SEND_TO_EMAIL_HOWES']
+    else
+      @to = ENV['SEND_TO_EMAIL']
+    end
+
+    mail(to: @to, from: @from, reply_to: @reply_to, subject: "New submission from " + @form_name.to_s)
   end
 end
